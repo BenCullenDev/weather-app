@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title>Weather App</title>
+    
     <style>
 * {
   box-sizing: border-box;
@@ -99,9 +100,24 @@ p {
     
   </body>
 </html>
-
+<script src="https://kit.fontawesome.com/41a94c612d.js" crossorigin="anonymous"></script>
     <script>
+
+
       const apiKey = '7088736eb077ce6ff5e8a57988d6f022';
+
+      const weatherIconMap = {
+  'clear sky': 'fas fa-sun',
+  'few clouds': 'fas fa-cloud-sun',
+  'scattered clouds': 'fas fa-cloud',
+  'broken clouds': 'fas fa-cloud',
+  'shower rain': 'fas fa-cloud-showers-heavy',
+  'rain': 'fas fa-cloud-rain',
+  'thunderstorm': 'fas fa-bolt',
+  'snow': 'fas fa-snowflake',
+  'mist': 'fas fa-smog',
+  'overcast clouds': 'fas fa-cloud'
+};
 
       const form = document.querySelector('form');
 const cityInput = document.querySelector('#city');
@@ -125,9 +141,10 @@ form.addEventListener('submit', async (e) => {
     const { temp, feels_like } = weatherData.main;
     const { description } = weatherData.weather[0];
     const sentenceCaseDescription = description.charAt(0).toUpperCase() + description.slice(1).toLowerCase();
+    const iconClass = weatherIconMap[description.toLowerCase()] || 'fas fa-question-circle';
     // Display the weather information
     weatherCity.textContent = city;
-    weatherDescription.textContent = `Temperature: ${temp}°C, Feels like: ${feels_like}°C, ${sentenceCaseDescription}.`;
+    weatherDescription.innerHTML = `<i class="${iconClass}"></i> Temperature: ${temp}°C, Feels like: ${feels_like}°C, ${sentenceCaseDescription}.`;
     weatherResults.style.display = 'block';
   } catch (error) {
     console.error(error);
