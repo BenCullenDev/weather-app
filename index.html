@@ -124,14 +124,14 @@ form.addEventListener('submit', async (e) => {
     const weatherData = await weatherResponse.json();
     const { temp, feels_like } = weatherData.main;
     const { description } = weatherData.weather[0];
-
+    const sentenceCaseDescription = description.charAt(0).toUpperCase() + description.slice(1).toLowerCase();
     // Display the weather information
     weatherCity.textContent = city;
-    weatherDescription.textContent = `Temperature: ${temp}°C, Feels like: ${feels_like}°C, ${description}`;
+    weatherDescription.textContent = `Temperature: ${temp}°C, Feels like: ${feels_like}°C, ${sentenceCaseDescription}.`;
     weatherResults.style.display = 'block';
   } catch (error) {
     console.error(error);
-    alert('An error occurred while getting the weather information. Please try again.');
+    alert('I have disabled the API Key so I don\'t get charged. Please email me at benjaminjcullen!gmail.com if you want to see the app working.');
   }
 });
     </script>
